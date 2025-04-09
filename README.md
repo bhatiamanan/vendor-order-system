@@ -36,7 +36,10 @@ This application provides a complete backend solution for an e-commerce platform
 
 Create a [`.env`](.env ) file in the root directory with:
 ```bash
-MONGODB_URI=mongodb://localhost:27017/vendor-order-system JWT_SECRET=your_jwt_secret_key JWT_EXPIRATION=24h PORT=3000
+MONGODB_URI=mongodb://localhost:27017/vendor-order-system
+JWT_SECRET=your_jwt_secret_key
+JWT_EXPIRATION=24h
+PORT=3000
 ```
 
 ### Installation
@@ -51,26 +54,31 @@ $ npm run start:dev
 # Production build
 $ npm run build
 $ npm run start:prod
+```
 
-API Endpoints
-Authentication
-POST /auth/signup - Register a new user
-POST /auth/login - User login
-Users
-GET /users - Get all users (Admin only)
-GET /users/:id - Get user by ID (Admin only)
-PATCH /users/:id - Update user (Admin only)
-DELETE /users/:id - Delete user (Admin only)
-Products
-GET /products - Get all products
-GET /products/:id - Get product by ID
-POST /products - Create product (Vendor only)
-PATCH /products/:id - Update product (Vendor or Admin)
-DELETE /products/:id - Delete product (Vendor or Admin)
-GET /products/vendor/:vendorId - Get products by vendor
-GET /products/inventory/low-stock - Get low stock products (Vendor only)
+## API Endpoints
 
-Project Structure
+### Authentication
+- `POST /auth/signup` - Register a new user
+- `POST /auth/login` - User login
+
+### Users
+- `GET /users` - Get all users (Admin only)
+- `GET /users/:id` - Get user by ID (Admin only)
+- `PATCH /users/:id` - Update user (Admin only)
+- `DELETE /users/:id` - Delete user (Admin only)
+
+### Products
+- `GET /products` - Get all products
+- `GET /products/:id` - Get product by ID
+- `POST /products` - Create product (Vendor only)
+- `PATCH /products/:id` - Update product (Vendor or Admin)
+- `DELETE /products/:id` - Delete product (Vendor or Admin)
+- `GET /products/vendor/:vendorId` - Get products by vendor
+- `GET /products/inventory/low-stock` - Get low stock products (Vendor only)
+
+## Project Structure
+```bash
 src/
 ├── auth/             # Authentication module
 ├── products/         # Products module
@@ -79,3 +87,4 @@ src/
 ├── app.module.ts
 ├── app.service.ts
 └── main.ts
+```
