@@ -14,17 +14,25 @@ export class ProductsService {
   ) {}
 
   async create(createProductDto: CreateProductDto, user: User): Promise<Product> {
-    // Only vendors can create products
-    if (user.role !== UserRole.VENDOR) {
-      throw new ForbiddenException('Only vendors can create products');
+    try {
+      // Only vendors can create products
+      if (user.role !== UserRole.VENDOR) {
+        throw new ForbiddenException('Only vendors can create products');
+      }
+  
+      const newProduct = new this.productModel({
+        ...createProductDto,
+        vendorId: user._id,
+      });
+  
+      return await newProduct.save();
+    } catch (error) {
+      console.error('Error creating product:', error);
+      if (error instanceof ForbiddenException) {
+        throw error;
+      }
+      throw new Error(`Failed to create product: ${error.message}`);
     }
-
-    const newProduct = new this.productModel({
-      ...createProductDto,
-      vendorId: user._id,
-    });
-
-    return newProduct.save();
   }
 
   async findAll(queryProductsDto: QueryProductsDto, user?: User): Promise<Product[]> {
