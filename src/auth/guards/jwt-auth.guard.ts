@@ -12,7 +12,7 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
       this.logger.error(`JWT Guard: Error: ${err.message}`);
       throw err;
     }
-    
+    console.log(`JWT Guard: User: ${JSON.stringify(user)}`);
     if (!user) {
       this.logger.error(`JWT Guard: No user found in token`);
       throw new UnauthorizedException('Invalid token or user not found');

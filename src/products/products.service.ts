@@ -1,4 +1,4 @@
-import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
+import { ForbiddenException, BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User, UserRole } from '../users/schemas/user.schema';
@@ -157,5 +157,19 @@ export class ProductsService {
       vendorId,
       stock: { $lte: threshold }
     }).exec();
+  }
+
+  // Add this method to your ProductsService
+  async decrementStock(productId: string, quantity: number, session?: any): Promise<Product> {
+    const product = await this.productModel.findOneAndUpdate(
+      { _id: productId, stock: { $gte: quantity } },
+      { $inc: { stock: -quantity } },
+      { new: true, session }
+    ).exec();
+    
+    if (!product) {
+      throw new BadRequestException(`Product ${productId} not found or has insufficient stock`);
+    }
+    return product;
   }
 }
