@@ -63,6 +63,12 @@ export class AnalyticsService {
 
 async getTopProducts(limit: number = 5): Promise<TopProduct[]> {
     this.logger.log(`Getting top ${limit} products by sales`);
+
+    // POTENTIAL ENHANCEMENT: Apply Strategy Pattern to support different 
+    // ranking algorithms (by revenue, units sold, profit margin, etc.)
+  
+    // POTENTIAL ENHANCEMENT: Implement background processing with caching
+    // to avoid recalculating expensive analytics queries on every request
     
     try {
       // Aggregation pipeline with better error handling

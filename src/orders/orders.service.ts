@@ -42,10 +42,14 @@ export class OrdersService {
   ) {}
 
   async create(createOrderDto: CreateOrderDto, user: User): Promise<Order> {
+    // POTENTIAL ENHANCEMENT: Implement Factory Pattern here to handle different order types
+    // POTENTIAL ENHANCEMENT: Apply Mediator Pattern for order processing pipeline with middlewares
+
     if (user.role !== UserRole.CUSTOMER) {
       throw new ForbiddenException('Only customers can create orders');
     }
-
+    
+    // POTENTIAL ENHANCEMENT: Implement Observer Pattern to notify interested parties
     const session = await this.connection.startSession();
     session.startTransaction();
 
@@ -375,6 +379,10 @@ export class OrdersService {
   async updateOrderStatus(id: string, status: OrderStatus, user: User): Promise<any> {
     this.logger.log(`Updating order ${id} status to ${status} by ${user.role} ${user._id}`);
     
+    // POTENTIAL ENHANCEMENT: Implement Event-Driven approach with domain events
+    // POTENTIAL ENHANCEMENT: Use State Pattern to manage order status transitions
+    // and ensure only valid state changes are allowed (e.g., can't go from delivered back to processing)
+
     try {
       // Check if this is a parent order or sub-order
       const isParentOrder = await this.orderModel.exists({ _id: id });

@@ -37,6 +37,9 @@ export class ProductsService {
 
   async findAll(queryProductsDto: QueryProductsDto, user?: User): Promise<Product[]> {
     const { category, minPrice, maxPrice, search } = queryProductsDto;
+
+    // POTENTIAL ENHANCEMENT: Apply Repository Pattern to abstract database operations
+    // POTENTIAL ENHANCEMENT: Add caching mechanism (Redis/in-memory) for frequently accessed products
     
     // Base query
     const query: any = {};
