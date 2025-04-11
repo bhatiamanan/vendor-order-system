@@ -145,3 +145,26 @@ src/
 ├── app.service.ts
 └── main.ts
 ```
+
+## Future Enhancements
+
+The following improvements could be made to the application in future iterations:
+
+- **Schema Validation**: Implement Joi or Zod for more robust request validation beyond class-validator
+- **Architecture Patterns**: 
+  - Adopt a more strict MVC pattern
+  - Implement Repository pattern to separate data access logic from services
+  - Use Service-Repository pattern for better separation of concerns
+- **Event-Driven Architecture**: 
+  - Implement event emitters/listeners for order status changes
+  - Add webhooks for external integrations
+- **Design Patterns**:
+  - Apply Factory pattern for creating different types of orders
+  - Use Strategy pattern for different payment methods
+- **Performance Optimizations**:
+  - Add Redis caching for product listings
+  - Implement database indexing for commonly queried fields
+- **Testing**:
+  - Add unit tests with Jest
+- **Documentation**:
+  - Add Swagger/OpenAPI documentation
