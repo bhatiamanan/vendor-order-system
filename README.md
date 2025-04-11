@@ -51,6 +51,7 @@ mongod --replSet rs0 --dbpath ~/data/rs0-0 --port 27017
 # In another terminal, initialize the replica set
 mongosh
 > rs.initiate({_id: "rs0", members: [{_id: 0, host: "localhost:27017"}]})
+```
 
 ### Environment Variables
 
